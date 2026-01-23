@@ -13,3 +13,11 @@ for i in range(n//2, 0, -1):
     space = " " * (n - 2*i)
     right = "*" * i
     print(left + space + right)
+
+
+    '''
+    *   *
+** **
+*****
+** **
+*   *'''
