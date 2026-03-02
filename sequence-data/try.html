@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sequence Data Types</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    font-family:Arial;
+    color:white;
+}
+.container{
+    width:450px;
+    margin:80px auto;
+    background:#111;
+    padding:30px;
+    text-align:center;
+    animation: fadeIn 1s ease;
+}
+h1{margin-bottom:25px;}
+input{
+    width:90%;
+    padding:10px;
+    margin-bottom:15px;
+    background:black;
+    border:1px solid #7c5cff;
+    color:white;
+}
+button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    background:black;
+    border:1px solid #7c5cff;
+    color:white;
+    cursor:pointer;
+    transition: all 0.3s ease;
+}
+button:hover{
+    background:#7c5cff;
+    transform: scale(1.03);
+}
+.menu{
+    animation: slideUp 0.6s ease;
+}
+pre{
+    background:black;
+    padding:15px;
+    margin-top:20px;
+    text-align:left;
+    color:#0f0;
+    min-height:60px;
+}
+select{
+    width:95%;
+    padding:10px;
+    background:black;
+    color:white;
+    border:1px solid #7c5cff;
+    margin-bottom:15px;
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+@keyframes slideUp{
+    from{transform:translateY(20px);opacity:0}
+    to{transform:translateY(0);opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Sequence Data Types</h1>
+
+<select id="type" onchange="reset()">
+<option value="">Select Data Type</option>
+<option value="string">String</option>
+<option value="list">List</option>
+<option value="tuple">Tuple</option>
+<option value="set">Set</option>
+</select>
+
+<input id="input" placeholder="Enter value / elements">
+
+<div class="menu" id="menu"></div>
+
+<pre id="out">Output...</pre>
+</div>
+
+<script>
+let s="", lst=[], tpl=[], st=new Set();
+
+function reset(){
+    menu.innerHTML="";
+    out("Output...");
+}
+
+function showButtons(btns){
+    menu.innerHTML = btns;
+}
+
+document.getElementById("type").addEventListener("change", ()=>{
+    let t=type.value;
+
+    if(t==="string"){
+        showButtons(`
+        <button onclick="createStr()">Create String</button>
+        <button onclick="dispStr()">1. Display</button>
+        <button onclick="lenStr()">2. Length</button>
+        <button onclick="upper()">3. Upper</button>
+        <button onclick="lower()">4. Lower</button>
+        <button onclick="revStr()">5. Reverse</button>
+        `);
+    }
+    if(t==="list"){
+        showButtons(`
+        <button onclick="createList()">Create List</button>
+        <button onclick="dispList()">1. Display</button>
+        <button onclick="lenList()">2. Length</button>
+        <button onclick="addList()">3. Add</button>
+        <button onclick="popList()">4. Pop</button>
+        <button onclick="sortList()">5. Sort</button>
+        `);
+    }
+    if(t==="tuple"){
+        showButtons(`
+        <button onclick="createTuple()">Create Tuple</button>
+        <button onclick="dispTuple()">1. Display</button>
+        <button onclick="lenTuple()">2. Length</button>
+        <button onclick="first()">3. First</button>
+        <button onclick="last()">4. Last</button>
+        `);
+    }
+    if(t==="set"){
+        showButtons(`
+        <button onclick="createSet()">Create Set</button>
+        <button onclick="dispSet()">1. Display</button>
+        <button onclick="lenSet()">2. Length</button>
+        <button onclick="addSet()">3. Add</button>
+        <button onclick="removeSet()">4. Remove</button>
+        `);
+    }
+});
+
+/* STRING */
+function createStr(){ s=input.value; out("String created: "+s); }
+function dispStr(){ out("String: "+s); }
+function lenStr(){ out("Length: "+s.length); }
+function upper(){ out("Upper: "+s.toUpperCase()); }
+function lower(){ out("Lower: "+s.toLowerCase()); }
+function revStr(){ out("Reverse: "+s.split("").reverse().join("")); }
+
+/* LIST */
+function createList(){ lst=input.value.split(" ").map(Number); out("List: "+lst); }
+function dispList(){ out("List: "+lst); }
+function lenList(){ out("Length: "+lst.length); }
+function addList(){ let x=Number(prompt("Enter element")); lst.push(x); out("Updated: "+lst); }
+function popList(){ lst.pop(); out("Updated: "+lst); }
+function sortList(){ lst.sort((a,b)=>a-b); out("Sorted: "+lst); }
+
+/* TUPLE */
+function createTuple(){ tpl=input.value.split(" ").map(Number); out("Tuple: ("+tpl+")"); }
+function dispTuple(){ out("Tuple: ("+tpl+")"); }
+function lenTuple(){ out("Length: "+tpl.length); }
+function first(){ out("First: "+tpl[0]); }
+function last(){ out("Last: "+tpl[tpl.length-1]); }
+
+/* SET */
+function createSet(){ st=new Set(input.value.split(" ").map(Number)); out("Set: "+Array.from(st)); }
+function dispSet(){ out("Set: "+Array.from(st)); }
+function lenSet(){ out("Length: "+st.size); }
+function addSet(){ let x=Number(prompt("Enter element")); st.add(x); out("Updated: "+Array.from(st)); }
+function removeSet(){ let x=Number(prompt("Enter element")); st.delete(x); out("Updated: "+Array.from(st)); }
+
+function out(msg){ document.getElementById("out").innerText=msg; }
+</script>
+
+</body>
+</html>

@@ -34,3 +34,19 @@ print("Set 1 after adding 11:", set1)
 # Removing elements
 set1.remove(11)
 print("Set 1 after removing 11:", set1)
+
+# update
+print("original Set 1:", set1)
+set1.update({12, 13})
+print("Set 1 after updating with {12, 13}:", set1)
+
+# clear
+print("Set 1 before clearing:", set1)
+set1.clear()
+print("Set 1 after clearing:", set1)
+
+# remove all the even multiplies of 3 
+for i in set1:
+    if i % 2 == 0:
+        set1.remove(i)
+print("Set 1 after removing even multiples of 3:", set1)
